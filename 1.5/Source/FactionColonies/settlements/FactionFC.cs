@@ -697,8 +697,28 @@ namespace FactionColonies
 
         public void setStartTime()
         {
-            taxTimeDue = Find.TickManager.TicksGame + LoadedModManager.GetMod<FactionColoniesMod>()
+            int timeBetweenTaxes = LoadedModManager.GetMod<FactionColoniesMod>()
                 .GetSettings<FactionColonies>().timeBetweenTaxes;
+            
+            // Safety check: ensure timeBetweenTaxes is at least 1 day
+            if (timeBetweenTaxes <= 0)
+            {
+                Log.Warning("Empire Mod - setStartTime: timeBetweenTaxes was " + timeBetweenTaxes + ", setting to 1 day minimum");
+                timeBetweenTaxes = GenDate.TicksPerDay;
+                
+                // Fix the corrupted setting
+                try
+                {
+                    LoadedModManager.GetMod<FactionColoniesMod>().GetSettings<FactionColonies>().timeBetweenTaxes = GenDate.TicksPerDay;
+                    Log.Message("Empire Mod - setStartTime: Fixed corrupted timeBetweenTaxes setting");
+                }
+                catch (Exception ex)
+                {
+                    Log.Error("Empire Mod - setStartTime: Failed to fix corrupted timeBetweenTaxes setting: " + ex.Message);
+                }
+            }
+            
+            taxTimeDue = Find.TickManager.TicksGame + timeBetweenTaxes;
             dailyTimer = Find.TickManager.TicksGame + 2000;
         }
 
@@ -1482,10 +1502,22 @@ namespace FactionColonies
                     int timeBetweenTaxes = LoadedModManager.GetMod<FactionColoniesMod>().GetSettings<FactionColonies>().timeBetweenTaxes;
                     
                     // Safety check: ensure timeBetweenTaxes is at least 1 day
+                    // This prevents issues when settings get corrupted during performance problems
                     if (timeBetweenTaxes <= 0)
                     {
                         Log.Warning("Empire Mod - TaxTick: timeBetweenTaxes was " + timeBetweenTaxes + ", setting to 1 day minimum");
                         timeBetweenTaxes = GenDate.TicksPerDay;
+                        
+                        // Fix the corrupted setting to prevent future issues
+                        try
+                        {
+                            LoadedModManager.GetMod<FactionColoniesMod>().GetSettings<FactionColonies>().timeBetweenTaxes = GenDate.TicksPerDay;
+                            Log.Message("Empire Mod - TaxTick: Fixed corrupted timeBetweenTaxes setting");
+                        }
+                        catch (Exception ex)
+                        {
+                            Log.Error("Empire Mod - TaxTick: Failed to fix corrupted timeBetweenTaxes setting: " + ex.Message);
+                        }
                     }
                     
                     taxTimeDue += timeBetweenTaxes;
