@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<LanguageData>
+  <TaxesHaveBeenDeposited>Taxes have been deposited</TaxesHaveBeenDeposited>
+  <BankDepositAmount>Amount deposited: {0} silver (Bank fee: {1})</BankDepositAmount>
+  <SelectPaymentMethod>Select Payment Method</SelectPaymentMethod>
+  <CaravanDelivery>Caravan Delivery</CaravanDelivery>
+  <DropPodDelivery>Drop Pod Delivery</DropPodDelivery>
+  <BankTransfer>Bank Transfer</BankTransfer>
+  <BankTransferFee>Bank transfers will incur a {0} transaction fee. Research Banking Efficiency to reduce this to 25%.</BankTransferFee>
+</LanguageData>

@@ -36,6 +36,10 @@
         <HintPath>..\..\..\RimWorldWin64_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
         <Private>False</Private>
       </Reference>
+      <Reference Include="VanillaTradingExpanded">
+        <HintPath>..\..\..\Mods\Vanilla Trading Expanded\1.5\Assemblies\VanillaTradingExpanded.dll</HintPath>
+        <Private>False</Private>
+      </Reference>
     </ItemGroup>
     <ItemGroup>
       <Reference Update="mscorlib">

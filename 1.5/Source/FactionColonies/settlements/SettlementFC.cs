@@ -668,6 +668,9 @@ namespace FactionColonies
         //shuttle stuff
         public int lastShuttleUsesTick = 0;
 
+        //payment method
+        public PaymentMethod preferredPaymentMethod = PaymentMethod.Caravan;
+
 
         //public static Biome biome;
 

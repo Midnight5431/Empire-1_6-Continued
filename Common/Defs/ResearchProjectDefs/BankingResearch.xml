@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+  <ResearchProjectDef>
+    <defName>EmpireBanking</defName>
+    <label>Empire Banking</label>
+    <description>Unlock the ability to use banking services for your Empire's tax collection and reward distribution. Settlements can deposit directly into your faction's bank account instead of sending caravans or drop pods.</description>
+    <baseCost>2000</baseCost>
+    <techLevel>Industrial</techLevel>
+    <prerequisites>
+      <li>MicroelectronicsBasics</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+    <tab>FCEmpire</tab>
+    <researchViewX>1</researchViewX>
+    <researchViewY>3</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>EmpireBankingEfficiency</defName>
+    <label>Empire Banking Efficiency</label>
+    <description>Improve your Empire's banking efficiency by reducing bank transaction fees from 50% to 25%.</description>
+    <baseCost>3000</baseCost>
+    <techLevel>Industrial</techLevel>
+    <prerequisites>
+      <li>EmpireBanking</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <requiredResearchFacilities>
+      <li>MultiAnalyzer</li>
+    </requiredResearchFacilities>
+    <tab>FCEmpire</tab>
+    <researchViewX>2</researchViewX>
+    <researchViewY>3</researchViewY>
+  </ResearchProjectDef>
+</Defs>

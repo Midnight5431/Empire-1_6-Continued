@@ -410,6 +410,12 @@ namespace FactionColonies
                 Find.WindowStack.Add(new SettlementCustomizeWindowFc(settlement));
                 //Log.Message("Settlement customize clicked");
             }
+
+            // Draw payment method button
+            if (Widgets.ButtonImage(new Rect(465, 5, 20, 20), TexLoad.iconBank))
+            {
+                Find.WindowStack.Add(new PaymentMethodSelectionWindow(settlement));
+            }
         }
 
         public void DrawSettlementStats(int x, int y)

@@ -447,8 +447,14 @@ namespace FactionColonies.util
 			return settlement?.worldSettlement?.def?.defName == "FCOrbitalPlatform";
 		}
 
-		public static TaxDeliveryMode TaxDeliveryModeForSettlement(bool canUseShuttle, int sourceTile = -1)
+		public static TaxDeliveryMode TaxDeliveryModeForSettlement(FCEvent evt, bool canUseShuttle, int sourceTile = -1)
 		{ 
+			// Check for bank delivery first
+			if (BankDeliveryMode.CanUseBankDelivery(evt))
+			{
+				return TaxDeliveryMode.Bank;
+			}
+
 			// Force drop pods for orbital platform settlements
 			if (sourceTile != -1 && IsOrbitalPlatformSettlement(sourceTile))
 			{
@@ -475,7 +481,7 @@ namespace FactionColonies.util
 		{
 			try
 			{
-				TaxDeliveryMode taxDeliveryMode = TaxDeliveryModeForSettlement(canUseShuttle, evt.source);
+				TaxDeliveryMode taxDeliveryMode = TaxDeliveryModeForSettlement(evt, canUseShuttle, evt.source);
 
 				switch (taxDeliveryMode)
 				{
@@ -487,6 +493,9 @@ namespace FactionColonies.util
 						break;
 					case TaxDeliveryMode.Shuttle:
 						SendShuttle(evt);
+						break;
+					case TaxDeliveryMode.Bank:
+						BankDeliveryMode.SendToBank(evt);
 						break;
 					default:
 						SpawnOnTaxSpot(evt);
@@ -617,7 +626,8 @@ namespace FactionColonies.util
 		TaxSpot,
 		Caravan,
 		DropPod,
-		Shuttle
+		Shuttle,
+		Bank
 	}
 }
 
